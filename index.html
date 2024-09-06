@@ -3,69 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Chat Only</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #fff; /* White background */
-            overflow: hidden; /* Prevent scrolling */
+    <title>Welcome to ABC</title>
+    <script>
+        // Function to detect user's country and redirect accordingly
+        async function redirectBasedOnLocation() {
+            try {
+                const response = await fetch('http://api.ipstack.com/check?access_key=0ae7e25585071baf1175504e4f9b385c');
+                const data = await response.json();
+                const country = data.country_code;
+
+                // Redirect if the user is from India
+                if (country === 'IN') {
+                    window.location.href = '/india.html';
+                }
+            } catch (error) {
+                console.error('Error fetching location data:', error);
+            }
         }
 
-        /* Fullscreen chat widget */
-        #livechat {
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-    </style>
+        // Call the redirection function when the page loads
+        window.onload = redirectBasedOnLocation;
+    </script>
 </head>
 <body>
-    <!-- Start of LiveChat (www.livechat.com) code -->
-    <script>
-        window.__lc = window.__lc || {};
-        window.__lc.license = 18509031;
-        window.__lc.integration_name = "manual_channels";
-        window.__lc.product_name = "livechat";
-        (function(n,t,c){
-            function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}
-            var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},
-            once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},
-            get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");
-            return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},
-            init:function(){
-                var n=t.createElement("script");
-                n.async=!0;
-                n.type="text/javascript";
-                n.src="https://cdn.livechatinc.com/tracking.js";
-                t.head.appendChild(n)
-            }};
-            !n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e
-        }(window,document,[].slice));
-
-        // Auto-maximize chat when the page loads
-        window.__lc.chat_between_groups = false; // Auto-start chat
-        LiveChatWidget.on('ready', function() {
-            // Ensure the chat is maximized when it loads
-            LiveChatWidget.call('maximize');
-
-            // Check every 500ms if the chat is minimized, and reopen it if needed
-            setInterval(function() {
-                LiveChatWidget.get('is_chat_minimized', function(isMinimized) {
-                    if (isMinimized) {
-                        LiveChatWidget.call('maximize');
-                    }
-                });
-            }, 500); // Check every 500 milliseconds
-        });
-    </script>
-    <noscript>
-        <a href="https://www.livechat.com/chat-with/18509031/" rel="nofollow">Chat with us</a>, powered by 
-        <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
-    </noscript>
-    <!-- End of LiveChat code -->
+    <h1>Welcome to ABC</h1>
+    <p>This is the homepage for users from outside India.</p>
 </body>
 </html>
