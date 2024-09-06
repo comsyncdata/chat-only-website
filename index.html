@@ -44,21 +44,22 @@
                 t.head.appendChild(n)
             }};
             !n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e
-        }(window,document,[].slice))
+        }(window,document,[].slice));
 
         // Auto-maximize chat when the page loads
         window.__lc.chat_between_groups = false; // Auto-start chat
         LiveChatWidget.on('ready', function() {
+            // Ensure the chat is maximized when it loads
             LiveChatWidget.call('maximize');
 
-            // Hide minimize button using JavaScript
-            var hideMinimizeButton = setInterval(function() {
-                var minimizeBtn = document.querySelector('.lc-1bs20p7-minimize');
-                if(minimizeBtn) {
-                    minimizeBtn.style.display = 'none';
-                    clearInterval(hideMinimizeButton); // Stop checking once the button is hidden
-                }
-            }, 100); // Check every 100ms until the button is found and hidden
+            // Check every 500ms if the chat is minimized, and reopen it if needed
+            setInterval(function() {
+                LiveChatWidget.get('is_chat_minimized', function(isMinimized) {
+                    if (isMinimized) {
+                        LiveChatWidget.call('maximize');
+                    }
+                });
+            }, 500); // Check every 500 milliseconds
         });
     </script>
     <noscript>
