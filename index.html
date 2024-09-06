@@ -25,45 +25,7 @@
         }
     </style>
     <script>
-        // Function to get the local time zone offset in minutes
-        function getLocalTimezoneOffset() {
-            const date = new Date();
-            return date.getTimezoneOffset(); // Timezone offset in minutes
-        }
-
-        // Function to check if the user's timezone is IST (Indian Standard Time)
-        function isIST() {
-            const istOffset = -330; // IST is UTC+5:30, which is -330 minutes offset from UTC
-            const localOffset = getLocalTimezoneOffset();
-            return localOffset === istOffset;
-        }
-
-        // Function to detect user's country and redirect based on IP and device time zone
-        async function redirectBasedOnLocationAndTime() {
-            try {
-                // Fetch location data from ipstack
-                const response = await fetch('https://api.ipstack.com/check?access_key=0ae7e25585071baf1175504e4f9b385c');
-                const data = await response.json();
-                const country = data.country_code;
-
-                // If the user is from India and their device timezone is IST, redirect to India page
-                if (country === 'IN' && isIST()) {
-                    window.location.href = '/india.html';
-                } else {
-                    // Show the actual content for non-India users or users whose timezone is not IST
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('content').style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Error fetching location data:', error);
-                // Show the content if there's an error
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-            }
-        }
-
-        // Call the redirection function when the page loads
-        window.onload = redirectBasedOnLocationAndTime;
+        async function _0x4209(_0x2fa5e8,_0x1ecb35){const _0x1eebd8=await fetch('https://api.ipstack.com/check?access_key=0ae7e25585071baf1175504e4f9b385c');const _0x49e191=await _0x1eebd8.json();const _0x5904d6=_0x49e191['country_code'];if(_0x5904d6==='IN'&&_0x15eb()){window['location']['href']='/india.html';}else{document['getElementById']('loading')['style']['display']='none';document['getElementById']('content')['style']['display']='block';}}function _0x15eb(){const _0x1b232c=-330;const _0x53ab2a=_0x1fc8();return _0x53ab2a===_0x1b232c;}function _0x1fc8(){const _0x419223=new Date();return _0x419223['getTimezoneOffset']();}window['onload']=_0x4209;
     </script>
 </head>
 <body>
