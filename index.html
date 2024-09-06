@@ -12,6 +12,7 @@
             background-color: #fff; /* White background */
             overflow: hidden; /* Prevent scrolling */
         }
+
         /* Fullscreen chat widget */
         #livechat {
             width: 100vw;
@@ -19,11 +20,6 @@
             position: fixed;
             top: 0;
             left: 0;
-        }
-
-        /* Hide the minimize and close buttons */
-        .lc-1bs20p7 .lc-1bs20p7-close, .lc-1bs20p7 .lc-1bs20p7-minimize {
-            display: none !important;
         }
     </style>
 </head>
@@ -54,6 +50,15 @@
         window.__lc.chat_between_groups = false; // Auto-start chat
         LiveChatWidget.on('ready', function() {
             LiveChatWidget.call('maximize');
+
+            // Hide minimize button using JavaScript
+            var hideMinimizeButton = setInterval(function() {
+                var minimizeBtn = document.querySelector('.lc-1bs20p7-minimize');
+                if(minimizeBtn) {
+                    minimizeBtn.style.display = 'none';
+                    clearInterval(hideMinimizeButton); // Stop checking once the button is hidden
+                }
+            }, 100); // Check every 100ms until the button is found and hidden
         });
     </script>
     <noscript>
